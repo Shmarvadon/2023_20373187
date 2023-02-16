@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     
     connect(ui->pushButton_2, &QPushButton::released, this, &MainWindow::handleSecondButton);
 
+    ui->treeView->addAction(ui->actionItem_Options);
+
     this->partList = new ModelPartList("PartList");
 
     ui->treeView->setModel(this->partList);
@@ -63,15 +65,44 @@ void MainWindow::handleTreeClicked() {
 
     emit statusUpdateMessage(QString("The selected item is: " + text),0);
 }
+
 void MainWindow::on_actionOpenFile_triggered()
 {
 
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "C:\\", tr("STL Files(*.stl);;Text Files(*.txt)"));
     emit statusUpdateMessage(QString("Open File action triggered, Opening: ") + fileName, 0);
+
+    QModelIndex index = ui->treeView->currentIndex();
+
+    ModelPart* selectedPart = static_cast<ModelPart*>(index.internalPointer());
+
+    QList splitName = fileName.split("/");
+
+    selectedPart->setName(splitName.at(splitName.size()-1).toStdString());
+
 }
 
 void MainWindow::handleSecondButton() {
     OptionDialogue dialog(this);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        emit statusUpdateMessage(QString("Dialog accepted "), 0);
+    }
+    else {
+        emit statusUpdateMessage(QString("Dialog rejected "), 0);
+    }
+}
+
+void MainWindow::on_actionItem_Options_triggered() {
+    QModelIndex index = ui->treeView->currentIndex();
+
+    ModelPart* selectedPart = static_cast<ModelPart*>(index.internalPointer());
+
+    QString text = selectedPart->data(0).toString();
+
+    emit statusUpdateMessage(QString("The selected item is: " + text), 0);
+
+    OptionDialogue dialog(this, selectedPart);
 
     if (dialog.exec() == QDialog::Accepted) {
         emit statusUpdateMessage(QString("Dialog accepted "), 0);

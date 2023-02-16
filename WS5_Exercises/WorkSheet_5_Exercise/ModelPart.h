@@ -104,7 +104,7 @@ public:
     /** Set visible flag
       * @param isVisible sets visible/non-visible
       */
-    void setVisible(bool isVisible);
+    void setVisible(bool val);
 
     /** Get visible flag
       * @return visible flag as boolean 
@@ -115,6 +115,10 @@ public:
       * @param fileName
       */
     void loadSTL(QString fileName);
+
+    void setName(std::string val);
+
+    std::string getName();
 
     /** Return actor
       * @return pointer to default actor for GUI rendering
@@ -135,6 +139,7 @@ private:
      * want to add you own.
      */
     bool                                        isVisible;          /**< True/false to indicate if should be visible in model rendering */
+    uint8_t Col_R, Col_G, Col_B;
 	
 	/* These are vtk properties that will be used to load/render a model of this part,
 	 * commented out for now but will be used later

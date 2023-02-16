@@ -98,6 +98,7 @@ int ModelPart::row() const {
 void ModelPart::setColour(const unsigned char R, const unsigned char G, const unsigned char B) {
     /* This is a placeholder function that will be used in the next worksheet */
     
+    Col_R = R; Col_G = G; Col_B = B;
     /* As the name suggests ... */
 }
 
@@ -105,14 +106,14 @@ unsigned char ModelPart::getColourR() {
     /* This is a placeholder function that will be used in the next worksheet */
     
     /* As the name suggests ... */
-    return 0;   // needs updating
+    return Col_R;   // needs updating
 }
 
 unsigned char ModelPart::getColourG() {
     /* This is a placeholder function that will be used in the next worksheet */
     
     /* As the name suggests ... */
-    return 0;   // needs updating
+    return Col_G;   // needs updating
 }
 
 
@@ -120,13 +121,16 @@ unsigned char ModelPart::getColourB() {
     /* This is a placeholder function that will be used in the next worksheet */
     
     /* As the name suggests ... */
-    return 0;   // needs updating
+    return Col_B;   // needs updating
 }
 
 
-void ModelPart::setVisible(bool isVisible) {
+void ModelPart::setVisible(bool value) {
     /* This is a placeholder function that will be used in the next worksheet */
     
+    isVisible = value;
+
+    m_itemData[1].setValue(QVariant(value));
     /* As the name suggests ... */
 }
 
@@ -134,7 +138,7 @@ bool ModelPart::visible() {
     /* This is a placeholder function that will be used in the next worksheet */
     
     /* As the name suggests ... */
-    return false;
+    return isVisible;
 }
 
 void ModelPart::loadSTL( QString fileName ) {
@@ -147,6 +151,14 @@ void ModelPart::loadSTL( QString fileName ) {
     /* 2. Initialise the part's vtkMapper */
     
     /* 3. Initialise the part's vtkActor and link to the mapper */
+}
+
+void ModelPart::setName(std::string val) {
+    m_itemData[0].setValue(QVariant(QString(val.c_str())));
+};
+
+std::string ModelPart::getName() {
+    return m_itemData.value(0).toString().toStdString();
 }
 
 //vtkSmartPointer<vtkActor> ModelPart::getActor() {

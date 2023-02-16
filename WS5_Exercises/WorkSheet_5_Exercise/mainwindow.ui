@@ -18,7 +18,11 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QTreeView" name="treeView"/>
+       <widget class="QTreeView" name="treeView">
+        <property name="contextMenuPolicy">
+         <enum>Qt::ActionsContextMenu</enum>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QWidget" name="widget" native="true"/>
@@ -95,6 +99,11 @@
    </property>
    <property name="text">
     <string>OpenFile</string>
+   </property>
+  </action>
+  <action name="actionItem_Options">
+   <property name="text">
+    <string>Item_Options</string>
    </property>
   </action>
  </widget>

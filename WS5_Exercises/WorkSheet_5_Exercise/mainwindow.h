@@ -35,6 +35,8 @@ private slots:
 
     void handleSecondButton();
 
+    void on_actionItem_Options_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
