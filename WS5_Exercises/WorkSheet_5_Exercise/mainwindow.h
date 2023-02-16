@@ -18,16 +18,18 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void handleButton();
-
-    void handleTreeClicked();
-
-
     ModelPartList* partList;
 
 signals:
 
     void statusUpdateMessage(const QString& message, int timeout);
+
+private slots:
+    void handleButton();
+
+    void handleTreeClicked();
+
+    void on_actionOpenFile_triggered();
 
 private:
     Ui::MainWindow *ui;
