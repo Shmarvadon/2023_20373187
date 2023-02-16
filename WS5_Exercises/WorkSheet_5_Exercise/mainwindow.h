@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include <qfiledialog.h>
+#include "optiondialogue.h"
 #include "ModelPart.h"
 #include "ModelPartList.h"
 
@@ -30,6 +32,8 @@ private slots:
     void handleTreeClicked();
 
     void on_actionOpenFile_triggered();
+
+    void handleSecondButton();
 
 private:
     Ui::MainWindow *ui;

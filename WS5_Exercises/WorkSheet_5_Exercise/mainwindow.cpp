@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(this, &MainWindow::statusUpdateMessage, ui->statusbar, &QStatusBar::showMessage);
     
+    connect(ui->pushButton_2, &QPushButton::released, this, &MainWindow::handleSecondButton);
+
     this->partList = new ModelPartList("PartList");
 
     ui->treeView->setModel(this->partList);
@@ -64,6 +66,17 @@ void MainWindow::handleTreeClicked() {
 void MainWindow::on_actionOpenFile_triggered()
 {
 
-    emit statusUpdateMessage(QString("Open File action triggered"), 0);
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "C:\\", tr("STL Files(*.stl);;Text Files(*.txt)"));
+    emit statusUpdateMessage(QString("Open File action triggered, Opening: ") + fileName, 0);
 }
 
+void MainWindow::handleSecondButton() {
+    OptionDialogue dialog(this);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        emit statusUpdateMessage(QString("Dialog accepted "), 0);
+    }
+    else {
+        emit statusUpdateMessage(QString("Dialog rejected "), 0);
+    }
+}
