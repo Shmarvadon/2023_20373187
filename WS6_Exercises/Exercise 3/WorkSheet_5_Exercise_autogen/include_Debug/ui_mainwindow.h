@@ -24,6 +24,7 @@
 #include <QtWidgets/QTreeView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "qvtkopenglnativewidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -36,7 +37,7 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QTreeView *treeView;
-    QWidget *widget;
+    QVTKOpenGLNativeWidget *widget;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButton;
@@ -70,10 +71,11 @@ public:
 
         horizontalLayout->addWidget(treeView);
 
-        widget = new QWidget(centralwidget);
+        widget = new QVTKOpenGLNativeWidget(centralwidget);
         widget->setObjectName("widget");
+        widget->setMinimumSize(QSize(0, 481));
 
-        horizontalLayout->addWidget(widget);
+        horizontalLayout->addWidget(widget, 0, Qt::AlignRight);
 
 
         verticalLayout->addLayout(horizontalLayout);

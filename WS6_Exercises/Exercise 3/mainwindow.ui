@@ -24,8 +24,15 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QWidget" name="widget" native="true"/>
+      <item alignment="Qt::AlignRight">
+       <widget class="QVTKOpenGLNativeWidget" name="widget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>481</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -107,6 +114,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QVTKOpenGLNativeWidget</class>
+   <extends>QWidget</extends>
+   <header>QVTKOpenGLNativeWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="icons.qrc"/>
  </resources>

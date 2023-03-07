@@ -9,6 +9,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(OpenVR_INCLUDE_DIR "C:/OpenVR/headers")
+set(OpenVR_LIBRARY "C:/OpenVR/lib/win64/openvr_api.lib")
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package( VTK REQUIRED )
@@ -53,8 +56,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(WorkSheet_5_Exercise PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(WorkSheet_5_Exercise PRIVATE Qt6::Widgets ${VTK_LIBRARIES})
+target_link_libraries(WorkSheet_5_Exercise PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${VTK_LIBRARIES})
 
 set_target_properties(WorkSheet_5_Exercise PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
@@ -73,4 +75,4 @@ if(QT_VERSION_MAJOR EQUAL 6)
 endif()
 
 add_custom_target( VRBindings )
-add_custom_command( TARGET VRBindings PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_cirectory ${CMAKE_SOURCE_DIR}/vrbindings ${CMAKE_BINARY_DIR}/)
+add_custom_command( TARGET VRBindings PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/vrbindings ${CMAKE_BINARY_DIR}/)

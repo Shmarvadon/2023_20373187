@@ -39,6 +39,35 @@ MainWindow::MainWindow(QWidget *parent)
             rootItem->child(i)->appendChild(new ModelPart({ name, visible }));
         }
     }
+
+    // VTK stuff.
+
+    renderWindow = vtkSmartPointer<vtkGenericOpenGLRenderWindow>::New();
+    ui->widget->setRenderWindow(renderWindow);
+
+    // Add a renderer
+
+    renderer = vtkSmartPointer<vtkRenderer>::New();
+    renderWindow->AddRenderer(renderer);
+
+    vtkNew<vtkCylinderSource> cylinder;
+    cylinder->SetResolution(8);
+
+    vtkNew<vtkPolyDataMapper> cylinderMapper;
+    cylinderMapper->SetInputConnection(cylinder->GetOutputPort());
+
+    vtkNew<vtkActor> cylinderActor;
+    cylinderActor->SetMapper(cylinderMapper);
+    cylinderActor->GetProperty()->SetColor(1.0,0.0,0.35);
+    cylinderActor->RotateX(30.0);
+    cylinderActor->RotateY(-45.0);
+
+    renderer->AddActor(cylinderActor);
+
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Azimuth(30);
+    renderer->GetActiveCamera()->Elevation(30);
+    renderer->ResetCameraClippingRange();
 }
 
 MainWindow::~MainWindow()

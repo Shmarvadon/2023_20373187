@@ -8,6 +8,14 @@
 #include "ModelPart.h"
 #include "ModelPartList.h"
 
+#include <vtkRenderer.h>
+#include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkCylinder.h>
+#include <vtkCylinderSource.h>
+#include <vtkPolyDataMapper.h>
+#include <vtkProperty.h>
+#include <vtkCamera.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -39,5 +47,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    vtkSmartPointer<vtkRenderer> renderer;
+    vtkSmartPointer<vtkGenericOpenGLRenderWindow> renderWindow;
 };
 #endif // MAINWINDOW_H
