@@ -16,6 +16,9 @@
 #include <vtkProperty.h>
 #include <vtkCamera.h>
 
+
+#include "VRRenderThread.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -51,7 +54,10 @@ private:
     vtkSmartPointer<vtkRenderer> renderer;
     vtkSmartPointer<vtkGenericOpenGLRenderWindow> renderWindow;
 
+    VRRenderThread renderthreadforvr;
 
     void updateRenderFromTree(const QModelIndex& index);
+    
+    void updateRenderFromTreeForVR(const QModelIndex& index);
 };
 #endif // MAINWINDOW_H

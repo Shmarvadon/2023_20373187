@@ -121,14 +121,18 @@ void MainWindow::on_actionOpenFile_triggered()
 }
 
 void MainWindow::handleSecondButton() {
-    OptionDialogue dialog(this);
 
-    if (dialog.exec() == QDialog::Accepted) {
-        emit statusUpdateMessage(QString("Dialog accepted "), 0);
+    emit statusUpdateMessage(QString("AMOGUS"), 0);
+
+    ModelPart* rootItem = this->partList->getRootItem();
+
+    for (size_t i = 0; i < 3; i++) {
+        for (size_t j = 0; j < 5; j++) {
+            renderthreadforvr.addActorOffline(rootItem->child(i)->child(j)->getNewActor());
+        }
     }
-    else {
-        emit statusUpdateMessage(QString("Dialog rejected "), 0);
-    }
+
+    renderthreadforvr.start();
 }
 
 void MainWindow::on_actionItem_Options_triggered() {
@@ -156,6 +160,24 @@ void MainWindow::updateRenderFromTree(const QModelIndex& index) {
 
 
         renderer->AddActor(selectedPart->getActor());
+    }
+
+    // Check to see if the part has any children and update them in the renderer.
+    if (!partList->hasChildren(index) || (index.flags() & Qt::ItemNeverHasChildren)) return;
+
+    // If it has children loop through re adding them to render.
+    int rows = partList->rowCount(index);
+    for (int i = 0; i < rows; i++) {
+        updateRenderFromTree(partList->index(i, 0, index));
+    }
+}
+
+void MainWindow::updateRenderFromTreeForVR(const QModelIndex& index) {
+    if (index.isValid()) {
+        ModelPart* selectedPart = static_cast<ModelPart*>(index.internalPointer());
+
+
+        renderthreadforvr.addActorOffline(selectedPart->getActor());
     }
 
     // Check to see if the part has any children and update them in the renderer.
