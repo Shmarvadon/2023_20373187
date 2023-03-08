@@ -107,8 +107,17 @@ void MainWindow::on_actionOpenFile_triggered()
 
     QList splitName = fileName.split("/");
 
-    selectedPart->setName(splitName.at(splitName.size()-1).toStdString());
+    // Ensuring that the open dialogue actually returns a string of which is a file name that can be loaded.
+    if (splitName.at(splitName.size() - 1) != "") {
+        QString name, visible("true");
+        partList->appendChild(index, { splitName.at(splitName.size() - 1), visible });
+        static_cast<ModelPart*>(index.internalPointer())->loadSTL(fileName);
 
+        renderer->RemoveAllViewProps();
+        updateRenderFromTree(partList->index(0, 0, QModelIndex()));
+        renderer->Render();
+        
+    }
 }
 
 void MainWindow::handleSecondButton() {
@@ -138,5 +147,23 @@ void MainWindow::on_actionItem_Options_triggered() {
     }
     else {
         emit statusUpdateMessage(QString("Dialog rejected "), 0);
+    }
+}
+
+void MainWindow::updateRenderFromTree(const QModelIndex& index) {
+    if (index.isValid()) {
+        ModelPart* selectedPart = static_cast<ModelPart*>(index.internalPointer());
+
+
+        renderer->AddActor(selectedPart->getActor());
+    }
+
+    // Check to see if the part has any children and update them in the renderer.
+    if (!partList->hasChildren(index) || (index.flags() & Qt::ItemNeverHasChildren)) return;
+
+    // If it has children loop through re adding them to render.
+    int rows = partList->rowCount(index);
+    for (int i = 0; i < rows; i++) {
+        updateRenderFromTree(partList->index(i, 0, index));
     }
 }

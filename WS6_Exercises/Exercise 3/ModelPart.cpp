@@ -13,8 +13,8 @@
 /* Commented out for now, will be uncommented later when you have
  * installed the VTK library
  */
-//#include <vtkSmartPointer.h>
-//#include <vtkDataSetMapper.h>
+#include <vtkSmartPointer.h>
+#include <vtkDataSetMapper.h>
 
 
 
@@ -148,9 +148,26 @@ void ModelPart::loadSTL( QString fileName ) {
      *     https://vtk.org/doc/nightly/html/classvtkSTLReader.html
      */
 
+    vtkNew<vtkSTLReader> FileHandler;
+    FileHandler->SetFileName(fileName.toStdString().c_str());
+    qDebug() << "Loading file: " << fileName.toStdString().c_str();
+    FileHandler->Update();
+    file = FileHandler;
+
     /* 2. Initialise the part's vtkMapper */
+
+    vtkNew<vtkPolyDataMapper> MapperHandler;
+    MapperHandler->SetInputConnection(file->GetOutputPort());
+    mapper = MapperHandler;
     
     /* 3. Initialise the part's vtkActor and link to the mapper */
+    
+    vtkNew<vtkActor> ActorHandler;
+    ActorHandler->SetMapper(MapperHandler);
+    actor = ActorHandler;
+
+    actor->GetProperty()->SetColor(1.0, 0.0, 0.35);
+
 }
 
 void ModelPart::setName(std::string val) {
@@ -161,13 +178,15 @@ std::string ModelPart::getName() {
     return m_itemData.value(0).toString().toStdString();
 }
 
-//vtkSmartPointer<vtkActor> ModelPart::getActor() {
+vtkSmartPointer<vtkActor> ModelPart::getActor() {
     /* This is a placeholder function that will be used in the next worksheet */
     
     /* Needs to return a smart pointer to the vtkActor to allow
      * part to be rendered.
      */
-//}
+
+    return actor;
+}
 
 //vtkActor* ModelPart::getNewActor() {
     /* This is a placeholder function that will be used in the next worksheet.
