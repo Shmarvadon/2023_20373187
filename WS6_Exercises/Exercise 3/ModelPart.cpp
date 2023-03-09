@@ -164,6 +164,7 @@ void ModelPart::loadSTL( QString fileName ) {
     
     vtkNew<vtkActor> ActorHandler;
     ActorHandler->SetMapper(MapperHandler);
+    ActorHandler->AddPosition(-150.0, -50.0, -100.0);
     actor = ActorHandler;
 
     actor->GetProperty()->SetColor(1.0, 0.0, 0.35);

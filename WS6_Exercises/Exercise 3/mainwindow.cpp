@@ -115,6 +115,12 @@ void MainWindow::on_actionOpenFile_triggered()
 
         renderer->RemoveAllViewProps();
         updateRenderFromTree(partList->index(0, 0, QModelIndex()));
+
+        renderer->ResetCamera();
+        renderer->GetActiveCamera()->SetPosition(0, 0, 10);
+        renderer->GetActiveCamera()->SetPosition(0, 0, 0);
+        renderer->GetActiveCamera()->SetPosition(0, 1, 0);
+        renderer->ResetCameraClippingRange();
         renderer->Render();
         
     }

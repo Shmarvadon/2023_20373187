@@ -1,0 +1,9 @@
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/WorkSheet_5_Exercise.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/VRBindings.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/list_install_components.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/install.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/install/local.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/WorkSheet_5_Exercise_autogen_timestamp_deps.dir
+C:/Users/harve/source/repos/2023_20373187/WS5_Exercises/build-WorkSheet_5_Exercise-Desktop_Qt_6_4_2_MSVC2019_64bit-Debug/CMakeFiles/WorkSheet_5_Exercise_autogen.dir
